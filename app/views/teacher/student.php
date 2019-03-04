@@ -3,8 +3,8 @@
  * Created by PhpStorm.
  * User: Kat
  * Date: 17.02.2019
- * Time: 0:44
+ * Time: 5:39
  */
 ?>
- <h1> Hello </h1>
-<p>Я мучаю <?=$fram?>!</p>
+
+<h1>Hello!</h1>
