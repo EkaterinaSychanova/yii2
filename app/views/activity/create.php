@@ -10,7 +10,7 @@ use kartik\time\TimePicker;
 <div class="row">
     <div class="col-lg-6"></div>
     <h2>Добавить событие:</h2>
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(['method' => 'POST']); ?>
     <?= $form->field($activity, 'title'); ?>
     <?= $form->field($activity, 'description')->textarea(); ?>
     <p>Когда будет событие:

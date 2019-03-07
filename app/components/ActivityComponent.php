@@ -2,6 +2,7 @@
 namespace app\components;
 
 use app\models\Activity;
+use app\models\ActivitySearch;
 use yii\base\Component;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;

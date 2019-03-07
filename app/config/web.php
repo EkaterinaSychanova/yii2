@@ -1,6 +1,6 @@
 <?php
 
-$date_format = require __DIR__ . '/date_format.php'; // конфиг с форматом даты
+//$date_format = require __DIR__ . '/date_format.php'; // конфиг с форматом даты
 $params = require __DIR__ . '/params.php';
 //$db = require __DIR__ . '/db.php';
 $db = file_exists(__DIR__ . '/db.php')
@@ -107,7 +107,7 @@ $config = [
 
     ],
 //    'params' => $params,
-    'params' => array_merge($params, $date_format),
+    'params' => array_merge($params),
 ];
 
 if (YII_ENV_DEV) {
