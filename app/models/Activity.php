@@ -12,20 +12,27 @@ use yii\validators\Validator;
 class Activity extends ActivityBase
 {
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => GetDateFunctionFormatBehavior::class,
+                'attribute_name' => 'date_created',
+
+            ],
+            [
+                'class' => SetActivityUpdate::class,
+                'attribute_name' => 'date_updated',
+            ],
+            LogMyBehavior::class,
+        ];
+    }
+
+
     public $email;
 
-	/**
-	* проверка email
-	*
-	* @var email 
-	*/
 	public $email_repeat;
 
-	/**
-	* картинка
-	*
-	* @var UploadedFile[]
-	*/
 	public $images;
 
 	

@@ -4,22 +4,6 @@ namespace app\models;
 
 use Yii;
 
-/**
- * This is the model class for table "activity".
- *
- * @property int $id
- * @property string $title
- * @property string $startDay
- * @property string $endDay
- * @property string $body
- * @property int $use_notification
- * @property int $is_blocked
- * @property int $is_repeated
- * @property string $date_created
- * @property int $user_id
- *
- * @property Users $user
- */
 class ActivityBase extends \yii\db\ActiveRecord
 {
     /**
@@ -36,12 +20,13 @@ class ActivityBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'startDay', 'endDay', 'user_id'], 'required'],
-            [['startDay', 'endDay', 'date_created'], 'safe'],
-            [['body'], 'string'],
-            [['use_notification', 'is_blocked', 'is_repeated', 'user_id'], 'integer'],
+            [['title', 'timeStart', 'description', 'user_id'], 'required'],
+            [['dateAct', 'date_created'], 'safe'],
+            [['use_notification', 'is_blocked', 'is_repeated', 'user_id', 'is_completed'], 'integer'],
+            [['description'], 'string'],
             [['title'], 'string', 'max' => 150],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['timeStart', 'timeEnd'], 'string', 'max' => 255],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -53,14 +38,16 @@ class ActivityBase extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'title' => Yii::t('app', 'Title'),
-            'startDay' => Yii::t('app', 'Start Day'),
-            'endDay' => Yii::t('app', 'End Day'),
-            'body' => Yii::t('app', 'Body'),
+            'dateAct' => Yii::t('app', 'Date Act'),
+            'timeStart' => Yii::t('app', 'Time Start'),
+            'timeEnd' => Yii::t('app', 'Time End'),
             'use_notification' => Yii::t('app', 'Use Notification'),
+            'description' => Yii::t('app', 'Description'),
             'is_blocked' => Yii::t('app', 'Is Blocked'),
             'is_repeated' => Yii::t('app', 'Is Repeated'),
-            'date_created' => Yii::t('app', 'Date Created'),
             'user_id' => Yii::t('app', 'User ID'),
+            'is_completed' => Yii::t('app', 'Is Completed'),
+            'date_created' => Yii::t('app', 'Date Created'),
         ];
     }
 
@@ -69,6 +56,20 @@ class ActivityBase extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(Users::className(), ['id' => 'user_id']);
+        return $this->hasOne(Users::class, ['id' => 'user_id']);
     }
+
+//    public function getUserID()
+//    {
+//        return $this->getUser()['id'];
+//    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+//    public function getImages()
+//    {
+//        return $this->hasMany(Images::className(), ['activity_id' => 'id']);
+//    }
+
 }

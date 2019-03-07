@@ -12,7 +12,7 @@ use Yii;
  * @property string $password_hash
  * @property string $token
  * @property string $fio
- * @property string $date_create
+ * @property string $date_created
  *
  * @property Activity[] $activities
  */
@@ -33,7 +33,7 @@ class UsersBase extends \yii\db\ActiveRecord
     {
         return [
             [['email', 'password_hash'], 'required'],
-            [['date_create'], 'safe'],
+            [['date_created'], 'safe'],
             [['email', 'token', 'fio'], 'string', 'max' => 150],
             [['password_hash'], 'string', 'max' => 300],
             [['email'], 'unique'],
@@ -51,7 +51,7 @@ class UsersBase extends \yii\db\ActiveRecord
             'password_hash' => Yii::t('app', 'Password Hash'),
             'token' => Yii::t('app', 'Token'),
             'fio' => Yii::t('app', 'Fio'),
-            'date_create' => Yii::t('app', 'Date Create'),
+            'date_created' => Yii::t('app', 'Date Created'),
         ];
     }
 

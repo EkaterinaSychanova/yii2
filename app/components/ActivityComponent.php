@@ -75,4 +75,28 @@ class ActivityComponent extends Component
         FileHelper::createDirectory(\Yii::getAlias('@app/web/images'));
         return \Yii::getAlias('@app/web/images/');
     }
+
+    public function getSearchProvider($params)
+    {
+        $model = new ActivitySearch();
+        return $model->getDataProvider();
+    }
+
+    // создание компонента через DAO
+//    public function createActivity(&$model)
+//    {
+//        if ($model->validate()) {
+//            $model->images = UploadedFile::getInstances($model, 'images');
+//            $path = $this->getPathSaveFile();
+//            foreach ($model->images as $image) {
+//                $name = mt_rand(0, 9999) . time() . '.' . $image->getExtension();
+//                if (!$image->saveAs($path . $name)) {
+//                    $model->addError('images', 'Файл не удалось переместить');
+//                    return false;
+//                }
+//                $model->imagesNewNames[] = $name;
+//            }
+//            return true;
+//        }
+//    }
 }
