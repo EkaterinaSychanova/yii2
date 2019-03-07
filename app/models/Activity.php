@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\behaviors\GetDateFunctionFormatBehavior;
 use Yii;
 use yii\base\Model;
 use yii\web\UploadedFile;
@@ -20,11 +21,11 @@ class Activity extends ActivityBase
                 'attribute_name' => 'date_created',
 
             ],
-            [
-                'class' => SetActivityUpdate::class,
-                'attribute_name' => 'date_updated',
-            ],
-            LogMyBehavior::class,
+//            [
+//                'class' => SetActivityUpdate::class,
+//                'attribute_name' => 'date_updated',
+//            ],
+//            LogMyBehavior::class,
         ];
     }
 

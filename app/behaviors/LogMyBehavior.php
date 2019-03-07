@@ -14,7 +14,7 @@ class LogMyBehavior extends Behavior
     {
         return [
             ActiveRecord::EVENT_AFTER_INSERT => 'logMeHere',
-            Activity::EVENT_MY_EVENT => 'logMeHere',
+//            Activity::EVENT_MY_EVENT => 'logMeHere',
             ];
     }
 

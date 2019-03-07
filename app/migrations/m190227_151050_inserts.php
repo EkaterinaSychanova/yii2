@@ -19,14 +19,14 @@ class m190227_151050_inserts extends Migration
 
 
         $this->batchInsert('activity',[
-            'title','timeStart','user_id','use_notification'
+            'title','timeStart','dateAct','user_id','use_notification'
         ],[
-            ['Заголовк 1',date('Y-m-d H:i:s'),1,0],
-            ['Заголовк 1_1',date('Y-m-d H:i:s'),1,0],
-            ['Заголовк 1_2','2018-12-12 00:00:00',1,0],
-            ['Заголовк 1_3',date('Y-m-d H:i:s'),1,1],
-            ['Заголовк 2','2018-12-12 00:00:00',2,0],
-            ['Заголовк 2',date('Y-m-d H:i:s'),1,1]
+            ['Заголовк 1',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),1,0],
+            ['Заголовк 1_1',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),1,0],
+            ['Заголовк 1_2','2018-12-12 00:00:00',date('Y-m-d H:i:s'),1,0],
+            ['Заголовк 1_3',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),1,1],
+            ['Заголовк 2','2018-12-12 00:00:00',date('Y-m-d H:i:s'),2,0],
+            ['Заголовк 2',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),1,1]
         ]);
 
     }

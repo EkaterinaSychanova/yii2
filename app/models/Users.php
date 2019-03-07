@@ -16,14 +16,14 @@ class Users extends UsersBase implements IdentityInterface
 
     public $username;
 
-    public function behaviors(){ // поведения
-        return [
-            [
-                'class' => SendEmailAfterAdminCreateUser::class,
-                'attribute_name' => 'email',
-            ]
-        ];
-    }
+//    public function behaviors(){ // поведения
+//        return [
+//            [
+//                'class' => SendEmailAfterAdminCreateUser::class,
+//                'attribute_name' => 'email',
+//            ]
+//        ];
+//    }
 
     public function rules()
     {
