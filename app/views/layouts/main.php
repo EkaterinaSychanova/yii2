@@ -27,6 +27,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+    <?php if($this->beginCache('nav_c',['duration'=>15])):?>
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
@@ -55,6 +56,11 @@ AppAsset::register($this);
             )
         ],
     ]);
+
+        NavBar::end();
+        $this->endCache();
+    endif;
+    ?>
     NavBar::end();
     ?>
 
@@ -69,6 +75,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
+        <p>Последняя посещенная страница - <?= \Yii::$app->session->get('lastPage'); ?></p>
         <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>

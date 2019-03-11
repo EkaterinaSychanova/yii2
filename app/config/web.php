@@ -1,10 +1,14 @@
 <?php
 
 $params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
+$db = file_exists( __DIR__.'/db_local.php')
+    ?(require __DIR__ . '/db_local.php')
+    :(require __DIR__ . '/db.php');
+
 
 $config = [
     'id' => 'basic',
+    'language' => 'ru_RU',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -14,7 +18,20 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'jbBs9Nd4zwtnV0XEjHu3dZpGeQp9OPKf',
+            'cookieValidationKey' => 'cwdFC8Xaaw1jp3e3H77Mrt1JdCBzbRqz',
+        ],
+        'activity' => [
+            'class' => \app\components\ActivityComponent::class,
+            'activity_class' => '\app\models\Activity'
+            ],
+        'day' => [
+            'class' => \app\components\DayComponent::class,
+            'day_class' => '\app\models\Day'
+        ],
+        'dao'=>['class'=>\app\components\DAOComponent::class],
+        'calendar' => [
+            'class' => \app\components\CalendarComponent::class,
+            'calendar_class' => '\app\models\Calendar'
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -61,14 +78,14 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '*'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 }
 
