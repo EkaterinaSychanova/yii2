@@ -8,6 +8,8 @@ use yii\Helpers\Html;
     <p>Создано событие:</p>
     <ul>
         <li><label>Дата</label>: <?= Html::encode($activity->dateAct); ?></li>
+        <li><label>Время</label>: <?= Html::encode($activity->timeStart) . ' - ' . Html::encode($activity->timeEnd); ?>
+        </li>
         <li><label>Название</label>: <?= Html::encode($activity->title); ?></li>
         <li><label>Описание</label>: <?= Html::encode($activity->description); ?></li>
         <li><label>Уведомление</label>: <?= Html::encode($activity->use_notification) ? 'Да' : 'Нет'; ?></li>

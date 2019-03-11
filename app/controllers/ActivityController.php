@@ -5,14 +5,18 @@
  * Date: 20.02.2019
  * Time: 0:11
  */
+
 namespace app\controllers;
+
 use app\base\BaseController;
 use app\controllers\actions\ActivityCreateAction;
 use app\controllers\actions\ActivityEditAction;
+
 //use app\models\Activity;
 
 class ActivityController extends BaseController
 {
+
     public function actions(){
         return [
             'create' => [

@@ -19,7 +19,7 @@ use kartik\time\TimePicker;
     </p>
     <form>
         <p>В какое время запускать событие?</p>
-        <p><input type="time" name="cron" value="12:00" min="00:01" max="06:00"></p>
+        <?= $form->field($activity, 'timeStart')->textarea();?>
     </form>
 
 
@@ -27,6 +27,7 @@ use kartik\time\TimePicker;
     <?= $form->field($activity, 'is_repeated')->checkbox(); ?>
     <?= $form->field($activity, 'email'); ?>
     <?= $form->field($activity, 'email_repeat'); ?>
+
     <?= $form->field($activity, 'use_notification')->checkbox(); ?>
     <?= $form->field($activity, 'images[]')->fileInput(['multiple' => true]); ?>
 

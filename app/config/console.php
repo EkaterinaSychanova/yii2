@@ -1,26 +1,54 @@
 <?php
 
 $params = require __DIR__ . '/params.php';
-$db = file_exists(__DIR__ . '/db_local.php')
+//$db = require __DIR__ . '/db.php';
+$db = file_exists(__DIR__ . '/db.php')
     ? (require __DIR__ . '/db_local.php')
-    : (require __DIR__ . '/db.php');
+    : (__DIR__ . '/db.php');
 
 $config = [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log','test'],
     'controllerNamespace' => 'app\commands',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
         '@tests' => '@app/tests',
     ],
-    'components' => [
-        'authManager'=>[
-            'class'=>'\yii\rbac\DbManager'
+    'modules' => [
+        'test' => [
+            'class' => 'app\modules\test\Module',
         ],
+    ],
+    'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager'
+        ],
+        'formatter'=>[
+            'class'=>'\yii\i18n\Formatter',
+            'dateFormat' => 'php:d.m.Y',
+            'datetimeFormat'=>'php:d.m.Y H:i'
+        ],
+        'activity' => [
+            'class' => \app\components\ActivityComponent::class,
+            'activity_class' => '\app\models\Activity',
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'enableSwiftMailerLogging' => true,
+            'transport' => [
+                'class'=>'Swift_SmtpTransport',
+                'host'=>'smtp.yandex.ru',
+                'username' => 'geekbrains@onedeveloper.ru',
+                'password' => 'qazWSX',
+                'port' => '587',
+                'encryption' => 'tls'
+            ]
         ],
         'log' => [
             'targets' => [

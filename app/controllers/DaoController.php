@@ -1,37 +1,58 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Kat
- * Date: 25.02.2019
- * Time: 20:11
- */
 
 namespace app\controllers;
 
 
 use app\base\BaseController;
-use app\components\DAOComponent;
+use app\components\DaoComponent;
+use yii\filters\PageCache;
 
 class DaoController extends BaseController
 {
+
+    public function behaviors()
+    {
+        return [
+            ['class'=>PageCache::class,
+                'only' => ['test'],
+                'duration' => 10]
+        ];
+    }
+
     public function actionTest(){
+        /** @var DaoComponent $dao */
+        $dao = \Yii::$app->dao;
 
-        /** @var DAOComponent $dao */
-        $dao=\Yii::$app->dao;
+        $dao->insertTest(); // тест транзакции
+        $users = $dao->getAllUsers();
+        $activityUser = $dao->getActivityUser();
+        $firstActivity = $dao->getFirstActivity();
+        $countNotif = $dao->countNotificationActivity();
+        $allActivityUser = $dao->getAllActivityUser(1);
+        $activityReader = $dao->getActivityReader();
 
-        $dao->insertTest();
+        return $this->render('test',
+            [
+                'users' => $users,
+                'activityUser'=>$activityUser,
+                'firstActivity'=>$firstActivity,
+                'count_notif' => $countNotif,
+                'allActivityUser'=>$allActivityUser,
+                'activityReader'=>$activityReader,
+                ]);
+    }
 
-        $users=$dao->getAllUsers();
-        $activityUser=$dao->getActivityUser();
+    public function actionCache(){
+//        \Yii::$app->cache->set('key1','value1');
+//
+//        \Yii::$app->cache->delete('key1');
+        \Yii::$app->cache->flush();
+        $value=\Yii::$app->cache->getOrSet('key1',function (){
+            return 'value3';
+        });
 
-        $firstAcitvity=$dao->getFirstActivity();
-        $countNotif=$dao->countNotificationActivity();
+//        \Yii::$app->cache->flush();
 
-        $allActivityUser=$dao->getAllActivityUser(1);
-        $activityReader=$dao->getActivityReader();
-
-        return $this->render('test',['users'=>$users,'activityUser'=>$activityUser,
-            'firstActivity'=>$firstAcitvity,'count_notif'=>$countNotif,
-            'allActivityUser'=>$allActivityUser,'activityReader'=>$activityReader]);
+        echo $value;
     }
 }

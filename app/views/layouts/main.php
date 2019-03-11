@@ -27,6 +27,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+    <?php if($this->beginCache('nav_c',['duration'=>15])):?>
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
@@ -55,6 +56,11 @@ AppAsset::register($this);
             )
         ],
     ]);
+
+        NavBar::end();
+        $this->endCache();
+    endif;
+    ?>
     NavBar::end();
     ?>
 
